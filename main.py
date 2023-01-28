@@ -10,7 +10,7 @@ from config import Config
 app = Flask(__name__)
 
 
-@app.route('/users.json/', methods=['GET', 'POST'])
+@app.route('/users/', methods=['GET', 'POST'])
 def get_users():
     if request.method == 'GET':
         try:
@@ -26,7 +26,7 @@ def get_users():
         return jsonify(code=200)
 
 
-@app.route('/users.json/<int:user_id>', methods=['GET', 'PUT', 'DELETE'])
+@app.route('/users/<int:user_id>', methods=['GET', 'PUT', 'DELETE'])
 def get_user(user_id):
     if request.method == 'GET':
         try:
@@ -53,7 +53,7 @@ def get_user(user_id):
         return jsonify(code=200)
 
 
-@app.route('/orders.json/', methods=['GET'])
+@app.route('/orders/', methods=['GET'])
 def get_orders():
     try:
         orders = db.session.query(Order).all()
@@ -62,7 +62,7 @@ def get_orders():
         return f'{e}'
 
 
-@app.route('/orders.json/<int:order_id>', methods=['GET'])
+@app.route('/orders/<int:order_id>', methods=['GET'])
 def get_order(order_id):
     try:
         order = db.session.query(Order).filter(Order.id == order_id).first()
@@ -71,7 +71,7 @@ def get_order(order_id):
         return f'{e}'
 
 
-@app.route('/offers.json/', methods=['GET'])
+@app.route('/offers/', methods=['GET'])
 def get_offers():
     try:
         offers = db.session.query(Offer).all()
@@ -80,7 +80,7 @@ def get_offers():
         return f'{e}'
 
 
-@app.route('/offers.json/<int:offer_id>', methods=['GET'])
+@app.route('/offers/<int:offer_id>', methods=['GET'])
 def get_offer(offer_id):
     try:
         offer = db.session.query(Offer).filter(Offer.id == offer_id).first()
