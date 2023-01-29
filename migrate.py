@@ -1,6 +1,7 @@
 from models import User, Order, Offer
 import json
 from init_db import db
+from datetime import datetime
 
 
 def insert_data_user(input_data):
@@ -22,6 +23,8 @@ def insert_data_user(input_data):
 
 def insert_data_order(input_data):
     for row in input_data:
+        row['start_date'] = datetime.strptime(row['start_date'], '%m/%d/%Y').date()
+        row['end_date'] = datetime.strptime(row['end_date'], '%m/%d/%Y').date()
         db.session.add(
             Order(
                 id=row.get('id'),

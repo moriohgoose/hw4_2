@@ -57,7 +57,7 @@ def get_user(user_id):
 def get_orders():
     try:
         orders = db.session.query(Order).all()
-        return jsonify([order.serialize() for order in orders])
+        return jsonify([order.get_order() for order in orders])
     except Exception as e:
         return f'{e}'
 
@@ -66,7 +66,7 @@ def get_orders():
 def get_order(order_id):
     try:
         order = db.session.query(Order).filter(Order.id == order_id).first()
-        return jsonify(order.serialize())
+        return jsonify(order.get_order())
     except Exception as e:
         return f'{e}'
 
@@ -75,7 +75,7 @@ def get_order(order_id):
 def get_offers():
     try:
         offers = db.session.query(Offer).all()
-        return jsonify([offer.serialize() for offer in offers])
+        return jsonify([offer.get_offer() for offer in offers])
     except Exception as e:
         return f'{e}'
 
@@ -84,7 +84,7 @@ def get_offers():
 def get_offer(offer_id):
     try:
         offer = db.session.query(Offer).filter(Offer.id == offer_id).first()
-        return jsonify(offer.serialize())
+        return jsonify(offer.get_offer())
     except Exception as e:
         return f'{e}'
 
